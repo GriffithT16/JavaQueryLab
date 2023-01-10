@@ -135,8 +135,8 @@ public class StreamLabService {
         // Write a query that retrieves all of the products in the shopping cart of users who have the role of "Employee".
     	// Return the list
         Role customerRole = roles.findAll().stream().filter(r -> r.getName().equals("Employee")).findFirst().orElse(null);
-        List<User> customerObjects = customerRole.getUsers().stream().toList();
-//        List<ShoppingcartItem> employeeCart = customerObjects.stream().filter(e -> e.getShoppingcartItems()).toList();
+//        List <User> customerObjects = users.findAll().stream().filter(c -> c.getRoles().contains(customerRole)).findFirst().orElse(null);
+//        List<ShoppingcartItem> employeeCart = customerObjects.stream().filter(e -> e.getShoppingcartItems().contains(customerObjects)).findFirst().orElse(null);
 //        List<Product> cartProducts = employeeCart.stream().map(p -> p.getProduct()).toList();
 
 
@@ -228,7 +228,7 @@ public class StreamLabService {
         Role DavidsRole = roles.findAll().stream().filter(r -> r.getUsers().equals(David)).findFirst().orElse(null);
         roles.delete(DavidsRole);
         DavidsRole.setName("Employee");
-        
+
     	return David;
     }
 
@@ -239,11 +239,24 @@ public class StreamLabService {
     
     // DProblemOne
     // Delete the role relationship from the user who has the email "oda@gmail.com".
+    public List<Role> DProblemOne() {
+
+        return null;
+    }
 
     // DProblemTwo
     // Delete all the product relationships to the user with the email "oda@gmail.com" in the ShoppingCart table.
+    public List<Productgit > DProblemTwo() {
 
+        return null;
+    }
     // DProblemThree
     // Delete the user with the email "oda@gmail.com" from the Users table.
+    public User DProblemThree() {
+        User oda = users.findAll().stream().filter(p -> p.getEmail().equals("oda@gmail.com")).findFirst().orElse(null);
+        users.delete(oda);
+
+        return oda;
+    }
 
 }
