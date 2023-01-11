@@ -135,12 +135,13 @@ public class StreamLabService {
         // Write a query that retrieves all of the products in the shopping cart of users who have the role of "Employee".
     	// Return the list
         Role customerRole = roles.findAll().stream().filter(r -> r.getName().equals("Employee")).findFirst().orElse(null);
-//        List <User> customerObjects = users.findAll().stream().filter(c -> c.getRoles().contains(customerRole)).findFirst().orElse(null);
-//        List<ShoppingcartItem> employeeCart = customerObjects.stream().filter(e -> e.getShoppingcartItems().contains(customerObjects)).findFirst().orElse(null);
-//        List<Product> cartProducts = employeeCart.stream().map(p -> p.getProduct()).toList();
-
-
-    	return null;
+        List <User> customerObjects = users.findAll().stream().filter(c -> c.getRoles().contains(customerRole)).toList();
+        List<Product> cartProducts = new ArrayList<Product>();
+        for (User user: customerObjects){
+            List<Product> customerCart = shoppingcartitems.findAll().stream().filter(c -> c.getUser().equals(user)).map(x -> x.getProduct()).toList();
+            cartProducts.addAll(customerCart);
+        }
+    	return cartProducts;
     }
 
     // <><><><><><><><> CUD (Create, Update, Delete) Actions <><><><><><><><><>
@@ -246,7 +247,7 @@ public class StreamLabService {
 
     // DProblemTwo
     // Delete all the product relationships to the user with the email "oda@gmail.com" in the ShoppingCart table.
-    public List<Productgit > DProblemTwo() {
+    public List<Product> DProblemTwo() {
 
         return null;
     }
